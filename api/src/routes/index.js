@@ -3,7 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const routeVideoGames = require('./routeVideogames.js');
 const routeGenre = require('./routeGenre.js');
-const routePost = require('./routePost.js');
+const routePlataforms = require('./routePlataforms.js')
 
 
 const router = Router();
@@ -15,6 +15,7 @@ router.use('/videogames', routeVideoGames);
 
 router.use('./genre', routeGenre);
 
-router.use('./videogame', routePost);
+router.use('./plataforms', routePlataforms);
+
 
 module.exports = router;
