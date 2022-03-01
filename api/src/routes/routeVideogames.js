@@ -86,19 +86,19 @@ router.get('/:id', async (req, res) => {
     try {
         if(!isNaN(id)){
             var idKey = parseInt(id);
-            const infoUrl = await axios.get(`https://api.rawg.io/api/games/${idkey}?key=${API_KEY}`);
+            var infoUrl = await axios.get(`https://api.rawg.io/api/games/${idKey}?key=${API_KEY}`);
             if(infoUrl.data.id) {
                 let genreStr = [];
                 for (i = 0; i < infoUrl.data.genres.length; i++){
                     genreStr.push(infoUrl.data.genres[i].name)
                 };
-                let plataformStr = [];
-                for(i = 0; i < infoUrl.data.plataforms.length; i++){
-                    plataformStr.push(infoUrl.data.plataforms[i].plataform.name)
+                let platformStr = [];
+                for(i = 0; i < infoUrl.data.platforms.length; i++){
+                    platformStr.push(infoUrl.data.platforms[i].platform.name)
                 }
                 const apiVgames = {
                     name: infoUrl.data.name,
-                    plataform: plataformStr.toString(),
+                    plataform: platformStr.toString(),
                     release_date: infoUrl.data.released,
                     image: infoUrl.data.background_image,
                     //description: infoUrl.data.description.replace(/<[^>]+>/g, ''),
@@ -126,7 +126,7 @@ router.get('/:id', async (req, res) => {
             }
             const dbGame = {
                 name: dbVigames.name,
-                plataforms: dbVigames.plataform,
+                platforms: dbVigames.plataform,
                 release_date: dbVigames.release_date,
                 image: dbVigames.image,
                 description: dbVigames.description,
