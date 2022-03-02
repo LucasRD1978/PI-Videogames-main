@@ -12,10 +12,10 @@ router.post('', async (req, res) => {
             rating,
             platform,
             createInDb,
-            genres,
+            genre,
         } = req.body;
     
-        let strPlatfomr = platform.join(',');
+       platform = platform.toString();
     
         let videogameCreate = await Videogame.create({
             image,
@@ -23,18 +23,16 @@ router.post('', async (req, res) => {
             description,
             release_date,
             rating,
-            platform: strPlatfomr,
+            platform,
             createInDb,
         })
 
-        genres.forEach(async (e) => {
-          try {
-            let genreDb = await Genre.findOne({where: {name: e}})
-            await videogameCreate.addGenre(genreDb)
-          } catch (error) {
-              console.log(error)
-          }   
-        })
+        const dbGenre = await Genre.findAll({
+            where:{name: genre}
+        });
+
+        videogameCreate.addGenre(dbGenre);
+
         res.send('Videogame created successfully')
         
     } catch (error) {

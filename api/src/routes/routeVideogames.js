@@ -7,6 +7,7 @@ const {API_KEY} = process.env;
 //Ruta que trae todos los videos juegos o los busca por query
 router.get('', async (req, res) => {
     const name = req.query.name;
+    //Buscar en la API
     try {
         if(name){
             let name2 = name.toLowerCase();
@@ -48,6 +49,7 @@ router.get('', async (req, res) => {
             }
         } else var apiVgames = []
 
+        //Buscar en la BD
         var dbVgames = [];
         dbVgames = await Videogame.findAll({
             include:{
@@ -72,6 +74,7 @@ router.get('', async (req, res) => {
                 rating: e.rating,
             }
         })
+        //Unir resultados
         const allVideogames = dbVgames.concat(apiVgames);
         res.json(allVideogames.length ? allVideogames : 'Not found games'); 
     } catch (error) {
@@ -85,6 +88,7 @@ router.get('/:id', async (req, res) => {
     const {id} = req.params;
     try {
         if(!isNaN(id)){
+            //Buscar en la api
             var idKey = parseInt(id);
             var infoUrl = await axios.get(`https://api.rawg.io/api/games/${idKey}?key=${API_KEY}`);
             if(infoUrl.data.id) {
@@ -108,7 +112,7 @@ router.get('/:id', async (req, res) => {
                 return res.status(200).json(apiVgames)
             }
         }
-
+        //Buscar en la BD
         var dbVigames = await Videogame.findByPk(Id, {
             include: [{
                 model: Genre,
@@ -141,6 +145,8 @@ router.get('/:id', async (req, res) => {
         console.log(error)
     }
 });
+
+
 
 
 module.exports = router;

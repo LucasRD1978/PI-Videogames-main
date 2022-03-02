@@ -16,7 +16,7 @@ router.use('/videogames', routeVideoGames);
 
 router.use('/genre', routeGenre);
 
-router.use('/createVG', routeCreateVG);
+router.use('/videogame', routeCreateVG);
 
 router.use('/platforms', routePlataforms);
 
