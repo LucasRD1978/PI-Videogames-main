@@ -1,0 +1,10 @@
+JSON para crear video juego
+{
+    "image":"https://sites.google.com/site/clasesdebasquet1012014/_/rsrc/1404094298486/home/clase-7/fiba/fiba....gif",
+    "name": "Basquetball FIBA",
+    "description":"",
+    "release_date":"20-05-2022",
+    "rating": 4,
+    "platform": "PlayStation 5",
+    "genres": "Sports"            
+}
