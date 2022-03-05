@@ -7,6 +7,7 @@ const {API_KEY} = process.env;
 //Ruta que trae todos los videos juegos o los busca por query
 router.get('', async (req, res) => {
     const name = req.query.name;
+    const genre = req.query.genre;
     //Buscar en la API
     try {
         if(name){
