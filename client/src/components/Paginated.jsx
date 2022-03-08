@@ -1,7 +1,7 @@
 import React from "react";
-import './Paginated.css';
+import style from './Paginated.module.css';
 
-export function Paginated ({videogamesPerPage, allVidegames, paginated}){
+export function Paginated ({videogamesPerPage, allVidegames, paginated, currentPage}){
     const pageNumber = [];
 
     for(let i = 1; i <= Math.ceil(allVidegames / videogamesPerPage); i++){
@@ -10,13 +10,15 @@ export function Paginated ({videogamesPerPage, allVidegames, paginated}){
 
     return (
         <nav>
-            <ul classname = "paginated">
+            <ul classname = {style.pagination}>
                 {pageNumber && pageNumber.map(n => (
-                    <li className="number" key = {n}>
-                        <button onClick={()=> paginated(n)}>{n}</button>
+                    <li className={style.pag} key = {n}>
+                        <a onClick={()=> paginated(n)}>{n}</a>
                     </li>
-                ))}
+                ))}                              
             </ul>
+            <span>{`Actual Page ${currentPage}`}</span> 
         </nav>
+        
     )
 }

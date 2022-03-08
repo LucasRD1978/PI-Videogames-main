@@ -1,0 +1,29 @@
+.pagination {
+    list-style-type: none;
+    cursor: pointer;
+    margin: 0;
+}
+
+.pag {
+    border: 1px solid blue;
+    display: inline-block;
+    height: 22px;
+    width: 20px;
+    color:rgb(15, 3, 1);
+    background-color: rgb(199, 199, 199);
+    padding:2px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 8x;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+span{
+    color:rgba(27, 20, 20, 0.932);
+    border-style: double;
+    border-color: black;
+    background-color: white;
+    font-style:normal;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}

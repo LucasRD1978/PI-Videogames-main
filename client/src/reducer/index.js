@@ -1,11 +1,13 @@
-import {GET_VIDEOGAMES, FILTER_BY_CREATE, ORDER_BY, FILTER_BY_NAME, FILTER_BY_GENRE, GET_DETAIL} from '../actions/constants';
+import {GET_VIDEOGAMES, FILTER_BY_CREATE, ORDER_BY, FILTER_BY_NAME, 
+    FILTER_BY_GENRE, GET_DETAIL, POST_VIDEOGAME, GET_GENRES, GET_PLATFORMS} from '../actions/constants';
 import { orderByNameAsc, orderByNameDesc, orderByRatingAsc, orderByRatingDesc } from "./OrderBy";
 
 const initialSate = {
     videogames : [],
     allVideogames : [],
     genres: [],
-    detail: []
+    detail: [],
+    platforms:[]
 }
 
 function rootReducer(state = initialSate, action){
@@ -62,9 +64,24 @@ function rootReducer(state = initialSate, action){
         return {
             ...state,
             detail: action.payload
+        };
+
+    case POST_VIDEOGAME:
+        return{
+            ...state
+        };
+    
+    case GET_GENRES:
+        return{
+            ...state,
+            genres: action.payload
+        };
+    case GET_PLATFORMS:
+        return{
+            ...state,
+            platforms: action.payload
         }
-
-
+    
     default:
             return state;
     }

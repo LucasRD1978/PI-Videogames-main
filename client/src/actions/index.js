@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {GET_VIDEOGAMES, FILTER_BY_CREATE, ORDER_BY, FILTER_BY_NAME, FILTER_BY_GENRE, GET_DETAIL} from './constants';
+import {GET_VIDEOGAMES, FILTER_BY_CREATE, ORDER_BY, 
+    FILTER_BY_NAME, FILTER_BY_GENRE, GET_DETAIL, GET_GENRES, GET_PLATFORMS} from './constants';
 
 export function getVideogames (){
     return async function (dispacht){
@@ -62,6 +63,45 @@ export function getDetail (id){
             return dispacht({
                 type: GET_DETAIL,
                 payload: json5.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function getGenres (){
+    return async function (dispacht){
+        try {
+            var json6 = await axios.get("http://localhost:3001/genre",{});
+            return dispacht({
+                type: GET_GENRES,
+                payload: json6.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function postVideogame (payload){
+    return async function(dispacht){
+        try {
+            var json7 = await axios.post("http://localhost:3001/videogame", payload);
+            return json7
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function getPlatforms (){
+    return async function(dispacht){
+        try {
+            var json8 = await axios.get("http://localhost:3001/platforms",{});
+            return dispacht ({
+                type: GET_PLATFORMS,
+                payload: json8.data
             })
         } catch (error) {
             console.log(error)

@@ -8,3 +8,4 @@ JSON para crear video juego
     "platform": "PlayStation 5",
     "genres": "Sports"            
 }
+

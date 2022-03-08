@@ -7,6 +7,7 @@ import Card from "./Card";
 import { Paginated } from "./Paginated";
 import {SearchBar} from "./SearchBar";
 import { SearchByGenre } from "./SearchBarByGenre";
+import style from './Home.module.css';
 
 export default function Home (){
     const dispacht = useDispatch();
@@ -46,31 +47,35 @@ export default function Home (){
 
 
     return (
-        <div>
-            <Link to ='./videogame'>Create Video Game</Link>
+        <div classname={style.st1}>
             <h1>Video Game App</h1>
-            <button onClick={e => {handleClick(e)}}>
-                Reload Video Games
-            </button>
+            <div className={style.st2}>
+            <Link to ='/videogame'>
+            <button className={style.but}>Create Video Game</button>    
+            </Link>
+            <button onClick={e => {handleClick(e)}} className={style.but}>Reload Video Games</button>
+            </div>
             <SearchBar/>
             <SearchByGenre/>
             <div>
-                <select onChange={e => handleFilterCreated(e)}>
+                <select onChange={e => handleFilterCreated(e)} classname = {style.filter}>
                     <option value="All">All</option>
                     <option value="Created">Created</option>
                     <option value="Existing">Existing</option>
                 </select>
-                <select onChange={e => handleOrder(e)}>
+                <select onChange={e => handleOrder(e)} classname = {style.filter}>
                     <option value="asc-alp">Ascending Alphabetic</option>
                     <option value="desc-alp">Descending Alphabetic</option>
                     <option value="asc-rat">Ascending Rating</option>
                     <option value="dec-rat">Descending Rating</option>
                 </select>
-                <Paginated 
+                <Paginated className = {style.st3}
                 videogamesPerPage = {videogamesPerPage}
                 allVidegames = {allVidegames.length}
+                currentPage = {currentPage}
                 paginated = {paginated}
                 />
+                <div className={style.st4}>
                 {
                      currentVideogames && currentVideogames.map (e => {
                         return (
@@ -81,6 +86,7 @@ export default function Home (){
                      }
                   )
                 }
+                </div>
             </div>
         </div>
     )
