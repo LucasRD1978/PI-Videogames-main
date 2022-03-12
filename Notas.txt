@@ -6,6 +6,6 @@ JSON para crear video juego
     "release_date":"20-05-2022",
     "rating": 4,
     "platform": "PlayStation 5",
-    "genres": "Sports"            
+    "genre": "Sports"           
 }
 

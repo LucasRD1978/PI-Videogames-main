@@ -38,7 +38,7 @@ router.get('', async (req, res) => {
                     v.push(e.genres[i].name)
                 }
             return {
-                Id: e.id,
+                id: e.id,
                 name: e.name,
                 image: e.background_image,
                 genres: v.toString(),
@@ -60,7 +60,7 @@ router.get('', async (req, res) => {
             }
         })
         if(name){
-            dbVgames = dbVgames.filter(e => e.name.toLowerCase().include(name.toLowerCase()))
+            dbVgames = dbVgames.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
         }
         var dbVgames = dbVgames.map(e => {
             let v = [];
@@ -68,7 +68,7 @@ router.get('', async (req, res) => {
                 v.push(e.genres[i].name)
             }
             return {
-                Id: e.id,
+                id: e.id,
                 name: e.name,
                 image: e.image,
                 genres: v.toString(),
@@ -84,7 +84,6 @@ router.get('', async (req, res) => {
 })
 
 //Ruta que busca por id
-
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
     try {
@@ -103,7 +102,7 @@ router.get('/:id', async (req, res) => {
                 }
                 const apiVgames = {
                     name: infoUrl.data.name,
-                    plataform: platformStr.toString(),
+                    platform: platformStr.toString(),
                     release_date: infoUrl.data.released,
                     image: infoUrl.data.background_image,
                     //description: infoUrl.data.description.replace(/<[^>]+>/g, ''),
@@ -114,7 +113,7 @@ router.get('/:id', async (req, res) => {
             }
         }
         //Buscar en la BD
-        var dbVigames = await Videogame.findByPk(Id, {
+        var dbVigames = await Videogame.findByPk(id, {
             include: [{
                 model: Genre,
                 attributes: ['name'],

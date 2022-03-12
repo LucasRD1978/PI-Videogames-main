@@ -2,6 +2,28 @@ import React, {useState, useEffect} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import {postVideogame, getGenres, getPlatforms} from '../actions/index';
+import style from './CreateVg.module.css';
+
+function validate (input){
+    let errors = {};
+    if(!input.name){
+        errors.name = "A name is required"
+    };
+    
+    if(!input.rating || input.rating<0 || input.rating >5){
+        errors.rating = "A rating is required and must be a nummber between 0-5"
+    };
+    
+    if(input.genre.length === 0 ){
+        errors.genre = "A genre is required"
+    };
+
+    if(input.platform.length === 0){
+        errors.platform = "A platform is required"
+    };
+
+    return errors
+};
 
 export function CreateVg(){
     const dispacht = useDispatch();
@@ -9,30 +31,7 @@ export function CreateVg(){
     const genres = useSelector((state) => state.genres);
     const platforms = useSelector((state) => state.platforms);
     const [errors, setErrors] = useState({});
-
-    function validate (formInput){
-        let errors = {};
-        if(!formInput.name){
-            errors.name = "A name is required"
-        };
-        if(!formInput.description){
-            errors.description = "A description is required"
-        };
-        if(!formInput.release_date){
-            errors.release_date = "A release date is required"
-        };
-        if(!formInput.rating){
-            errors.rating = "A rating is required"
-        };
-        if(!formInput.image){
-            errors.image = "A image is required"
-        };
-        if(!formInput.genre){
-            errors.genre = "A genre is required"
-        };
-    };
-
-    const [formInput, setformInput] = useState({
+    const [input, setinput] = useState({
         name: "",
         description: "",
         release_date: "",
@@ -43,84 +42,83 @@ export function CreateVg(){
     });
 
     function handleChange(e){
-        setformInput({
-            ...formInput,
+        setinput({
+            ...input,
             [e.target.name] : e.target.value
            });
         setErrors(validate({
-            ...formInput,
+            ...input,
             [e.target.value]: e.target.value
         }));
-        console.log(formInput)
+        
     };
 
     function handleSelect(e){
-        setformInput({
-            ...formInput,
-            genre: [...formInput.genre, e.target.value]
+        setinput({
+            ...input,
+            genre: [...input.genre, e.target.value]
         })
     };
 
     function handleSelect2(e){
-        setformInput({
-            ...formInput,
-            platform:[...formInput.platform, e.target.value]
+        setinput({
+            ...input,
+            platform:[...input.platform, e.target.value]
         })
     };
 
     function handleSubmit(e){
         e.preventDefault();
-        dispacht(postVideogame(formInput));
+        dispacht(postVideogame(input));
         alert("Videogame successfully created");
-        setformInput({
+        setinput({
+            image: "",
             name: "",
             description: "",
             release_date: "",
             rating: "",
-            image: "",
             platform: [],
             genre: []
         });
-        navigate.push('/home')
+        navigate('/home')
     }
 
     useEffect(() => {
         dispacht(getGenres())
-    }, []);
+    }, [dispacht]);
 
     useEffect(() =>{
         dispacht(getPlatforms())
-    }, []);
+    }, [dispacht]);
 
     return (
-        <div>
-            <Link to ="/home"><button>Back to Home</button></Link>
+        <div className={style.container}>
+            <Link to ="/home"><button className={style.button2}>Back to Home</button></Link>
             <h1>Create Videogame</h1>
-            <form onChange={(e) => handleSubmit(e)}>
+            <form className={style.area} onSubmit={(e) => handleSubmit(e)}>
+                <div className={style.detailsarea}>
+                <div>
                 <div>
                     <label>Name: </label>
-                    <input type="text" value= {formInput.name} name = "name"  onChange={(e) => handleChange(e)}/>
-                    {errors.name && (<p className="error">{errors.name}</p>)}
+                    <input  type="text" value= {input.name}  name = "name" onChange={(e) => handleChange(e)} />
+                     {errors.name && (<p className="error">{errors.name}</p>)}
                 </div>
                 <div>
                     <label>Description: </label>
-                    <input type="text" value= {formInput.description} name = "description"  onChange={(e) => handleChange(e)}/>
-                    {errors.description && (<p className="error">{errors.description}</p>)}
+                    <input type="text" value= {input.description} name = "description"  onChange={(e) => handleChange(e)}/>
                 </div>
                 <div>
                     <label>Release Date: </label>
-                    <input type="text" value= {formInput.release_date} name = "release date"  onChange={(e) => handleChange(e)}/>
-                    {errors.release_date && (<p className="error">{errors.release_date}</p>)}
+                    <input type="text" value= {input.release_date} name = "release_date" placeholder="DD-MM-YYYY" onChange={(e) => handleChange(e)}/>
                 </div>
                 <div>
                     <label>Rating: </label>
-                    <input type="text" value= {formInput.rating} name = "rating"  onChange={(e) => handleChange(e)}/>
+                    <input type="text" value= {input.rating} name = "rating"  onChange={(e) => handleChange(e)}/>
                     {errors.rating && (<p className="error">{errors.rating}</p>)}
                 </div>
                 <div>
                     <label>Image: </label>
-                    <input type= "text" value= {formInput.image} name = "image"  onChange={(e) => handleChange(e)}/>
-                    {errors.image && (<p className="error">{errors.image}</p>)}
+                    <input type= "text" value= {input.image} name = "image"  onChange={(e) => handleChange(e)}/>
                 </div>
                 <div>
                     <label>Platforms: </label>
@@ -129,28 +127,30 @@ export function CreateVg(){
                             <option value={e.name}>{e.name}</option>
                         ))}
                     </select>
-                    {errors.platform && (<p className="error">{errors.platform}</p>)}
                     <ul>
                         <li>
-                            {formInput.platform.map(e => e + ',')}
+                            {input.platform.map(e => e + ',')}
                         </li>
                     </ul>
+                    {errors.platform && (<p className="error">{errors.platform}</p>)}
                 </div>
                 <div>
-                    <labe>Genres: </labe>
+                    <label>Genres: </label>
                     <select onChange = {(e) => handleSelect(e)}>
                         {genres.map((e) => (
                             <option value={e.name}>{e.name}</option>
                         ))}
                     </select>
-                    {errors.genre && (<p className="error">{errors.genre}</p>)}
                    <ul>
                        <li>
-                           {formInput.genre.map(e => e + ',')}
+                           {input.genre.map(e => e + ',')}
                        </li>
-                   </ul>
+                   </ul>                
+                    {errors.genre && (<p className="error">{errors.genre}</p>)}
                 </div>
-                <button type="submit">Create Videgame</button>
+                </div>
+                <button className={style.button} type="submit">Create Videgame</button>
+                </div>
             </form>
         </div>
     )

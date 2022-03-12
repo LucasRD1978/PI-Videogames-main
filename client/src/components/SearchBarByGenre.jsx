@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import {useDispatch} from "react-redux";
 import {getVideogamesByGenre} from "../actions";
+import style from './SearchBar.module.css';
 
 export function SearchByGenre(){
     const dispacht = useDispatch();
@@ -19,9 +20,9 @@ export function SearchByGenre(){
     };
 
     return (
-        <div>
-            <input type = "text" placeholder="Search By Genre" onChange={e => handleInputGenre (e)}/>
-            <button type="submit" onClick={e => handleSubmit(e) }>Search</button>
+        <div className={style.container}>
+            <input className={style.input} type = "text" placeholder="Search By Genre" onChange={e => handleInputGenre (e)}/>
+            <button className={style.button} type="submit" onClick={e => handleSubmit(e) }>Search</button>
         </div>
     )
 }

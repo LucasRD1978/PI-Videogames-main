@@ -48,15 +48,20 @@ export default function Home (){
 
     return (
         <div classname={style.st1}>
-            <h1>Video Game App</h1>
+            <div>
             <div className={style.st2}>
             <Link to ='/videogame'>
             <button className={style.but}>Create Video Game</button>    
             </Link>
             <button onClick={e => {handleClick(e)}} className={style.but}>Reload Video Games</button>
             </div>
+            <div className={style.st5}>
             <SearchBar/>
+            </div>
+            <div className={style.st5}>
             <SearchByGenre/>
+            </div>
+            </div>
             <div>
                 <select onChange={e => handleFilterCreated(e)} classname = {style.filter}>
                     <option value="All">All</option>
@@ -79,7 +84,7 @@ export default function Home (){
                 {
                      currentVideogames && currentVideogames.map (e => {
                         return (
-                            <Link to = {`/home/${e.Id}`}>
+                            <Link to = {`/home/${e.id}`}>
                             <Card name = {e.name} image = {e.image} genre = {e.genres}/>
                             </Link>
                         )

@@ -9,7 +9,7 @@ const getApiInfo = async () => {
         const apiUrl2 = await apiUrl.data.results;
         const apiInfo = await apiUrl2.map(e => {
             return {
-                Id: e.id,
+                id: e.id,
                 image: e.background_image,
                 name: e.name,
                 genre: e.genres.map(e => e.name),

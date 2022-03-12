@@ -76,6 +76,7 @@ function rootReducer(state = initialSate, action){
             ...state,
             genres: action.payload
         };
+        
     case GET_PLATFORMS:
         return{
             ...state,

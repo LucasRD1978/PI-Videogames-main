@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {Videogame, Genre} = require('../db')
+const {Videogame, Genre, Platforms} = require('../db')
 const router = Router();
 
 router.post('', async (req, res) => {
@@ -28,10 +28,16 @@ router.post('', async (req, res) => {
         })
 
         const dbGenre = await Genre.findAll({
-            where:{name: genre}
+            where : {name: genre}
         });
 
         videogameCreate.addGenre(dbGenre);
+
+        // const dbPlatform = await Platforms.findAll({
+        //     where:{name: platform}
+        // });
+
+        // videogameCreate.addPlatforms(dbPlatform);
 
         res.send('Videogame created successfully')
         
