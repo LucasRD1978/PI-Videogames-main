@@ -42,7 +42,8 @@ router.get('', async (req, res) => {
                 name: e.name,
                 image: e.background_image,
                 genres: v.toString(),
-                rating: e.rating
+                rating: e.rating,
+                origin: 'API'
             }
             })
             if(name){
@@ -73,6 +74,7 @@ router.get('', async (req, res) => {
                 image: e.image,
                 genres: v.toString(),
                 rating: e.rating,
+                origin: 'DB'
             }
         })
         //Unir resultados
@@ -108,7 +110,7 @@ router.get('/:id', async (req, res) => {
                     //description: infoUrl.data.description.replace(/<[^>]+>/g, ''),
                     rating: infoUrl.data.rating,
                     genres: genreStr.toString(),
-                }
+                    }
                 return res.status(200).json(apiVgames)
             }
         }
@@ -135,8 +137,8 @@ router.get('/:id', async (req, res) => {
                 image: dbVigames.image,
                 description: dbVigames.description,
                 rating: dbVigames.rating,
-                genres: genreStr.toString()
-            }
+                genres: genreStr.toString(),
+                }
             return res.status(200).json(dbVigames)
         }
         return res.status(404).send('Videgame not found')

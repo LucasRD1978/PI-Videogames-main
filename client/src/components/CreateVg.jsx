@@ -69,6 +69,14 @@ export function CreateVg(){
 
     function handleSubmit(e){
         e.preventDefault();
+        if(!input.name) {return alert('Name is required')};
+        if(!/^\d{2}-\d{2}-\d{4}$/.test(input.release_date))
+        {return alert('The correct date format is DD-MM-YYYY')};
+        if(!input.rating) {return alert('Rating is required')};
+        if(!/^\d$/.test(input.rating) || input.rating < 0 || input.rating > 5)
+        {return alert('Rating must be a number between 0 and 5')};
+        if(input.genre.length === 0) {return alert('Genre is required')};
+        if(input.platform.length === 0) {return alert('Platform is required')};
         dispacht(postVideogame(input));
         alert("Videogame successfully created");
         setinput({

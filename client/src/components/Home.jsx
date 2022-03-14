@@ -28,7 +28,7 @@ export default function Home (){
     },[]);
 
     function handleClick(e){
-        e.prevent.default();
+        e.preventDefault();
         dispacht(getVideogames())
     };
 

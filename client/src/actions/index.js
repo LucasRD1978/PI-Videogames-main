@@ -45,8 +45,7 @@ export function getVideogamesByGenre (payload){
         try {
             var json3 = await axios.get(`http://localhost:3001/videogames`,{});
             var json4 = json3.data.filter(e => e.genres.toLowerCase().includes(payload.toLowerCase()));
-            console.log(json4);
-            return dispacht({
+                return dispacht({
                 type: FILTER_BY_GENRE,
                 payload:json4
             })
