@@ -107,7 +107,7 @@ router.get('/:id', async (req, res) => {
                     platform: platformStr.toString(),
                     release_date: infoUrl.data.released,
                     image: infoUrl.data.background_image,
-                    //description: infoUrl.data.description.replace(/<[^>]+>/g, ''),
+                    description: infoUrl.data.description.replace(/<[^>]+>/g, ''),
                     rating: infoUrl.data.rating,
                     genres: genreStr.toString(),
                     }
