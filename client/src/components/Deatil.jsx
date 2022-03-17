@@ -30,6 +30,7 @@ export function Detail(){
                     <h3>Platforms: {myVidegame.platform}</h3>
                     <h3>Rating: {myVidegame.rating}</h3>
                     <h3>Released Date: {myVidegame.release_date}</h3>
+                    <h4>Description: {myVidegame.description}</h4>
                 </div> 
                 
             }
