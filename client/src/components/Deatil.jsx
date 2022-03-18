@@ -11,7 +11,7 @@ export function Detail(){
 
     useEffect(() => {
         dispacht(getDetail(id));
-    }, [dispacht.id]);
+    }, []);
 
     const myVidegame = useSelector((state) => state.detail);
     console.log(myVidegame);

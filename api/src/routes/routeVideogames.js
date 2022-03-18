@@ -138,6 +138,7 @@ router.get('/:id', async (req, res) => {
                 description: dbVigames.description,
                 rating: dbVigames.rating,
                 genres: genreStr.toString(),
+                
                 }
             return res.status(200).json(dbVigames)
         }
